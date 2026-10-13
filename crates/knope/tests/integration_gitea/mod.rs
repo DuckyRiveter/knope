@@ -237,10 +237,6 @@ async fn gitea_release_workflow() {
     }
 
     // Gitea may take a moment to finalise a new release; poll with retries.
-    // Note: these verification calls use the `Authorization: token` header, which is the
-    // standard Gitea API authentication method for test helpers. Knope's own production
-    // Gitea API calls use `?access_token=` query params internally — both are valid and
-    // accepted by Gitea. The test validates the release creation result, not the auth path.
     let url = format!("{base}/releases/tags/{expected_tag}");
     let mut release_opt = None;
     for _ in 0..5 {
